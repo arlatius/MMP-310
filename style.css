@@ -3,8 +3,6 @@
 /* generic selector */
 
 body {
-    background-color: crimson;
-
     margin: 0;
     /* margins
     margin (4): top right bottom left;
@@ -12,14 +10,15 @@ body {
     margin (2): top/bottom left/right;
     margin (1): all;
     margin: auto; automatically centers element*/
-    background-color: #355070;
-    color: #b56576;
+    background-color: #faf9f9;
+    color: #89b0ae;
     /*text color*/
     font-family: Arial, sans-serif;
 }
 
 a {
-    color: #eaac8b;
+    color: #e89879;
+    text-decoration: none; /*removes the underline from links*/
 }
 
 ul {
@@ -36,13 +35,14 @@ li {
 
 /*psuedo selector- user interaction*/
 a:hover {
-    color: #db875a;
+    color: #d96f55;
     transition: 0.3s ease-in;
     /*makes it smooth instead of instant*/
 }
 
 a:active {
-    color: #e56b6f;
+    color: #c9251c;
+    transition: none;
 }
 
 img {
@@ -55,21 +55,26 @@ img {
 
 /* #idName */
 #container {
-    background-color: dimgrey;
+    /*background-color: dimgrey;*/
 }
 
 #header {
-    background-color: salmon;
-
+    /* COLOR background-color: salmon;*/
+    
+    background-color: #bee3db;
     text-align: center;
 }
 
 #header h1 {
-    margin: 5% auto 0%;
+    margin: 0%;
+    padding: 5%
+    
 }
 
 #header ul {
-    margin: 0px auto 5%
+    margin: 0px auto 5%;
+    padding: 10px;
+    background-color: #ffd6ba;
 }
 
 #header li {
@@ -83,7 +88,7 @@ img {
 }
 
 #portfolio {
-    background-color: aquamarine;
+    /* COLOR background-color: aquamarine;*/
 
     margin: 5%;
     display: grid;
@@ -105,24 +110,32 @@ img {
 
 /*.className { }*/
 .project {
-    background-color: darkseagreen;
+    /* COLOR background-color: darkseagreen;*/
+    background-color: #bee3db;
     
-    margin: 0;
-    border: 2px solid red;
     padding: .5em;
-    /*background-color:transparent;*/
-    transition: background-color 0.3s ease-in;
-    
-    
+    transition: background-color 0.5s;
 }
 
 .project:hover {
-    background-color: yellow;
+    /* COLOR background-color: yellow;*/
+    
+    background-color: #89b0ae;
+    transition: color  0.5s;
+    color: #bee3db;
+} 
 
+.project:hover a{
+    transition: color  0.5s;
+    color: #fcbda4;
 }
 
 .project a {
     font-size: 1.3em;
+}
+
+.project a:hover{
+    color: #fab9a0;
 }
 
 
@@ -132,22 +145,27 @@ img {
 
 /*------------------------------------------------------------------------ABOUT PAGE------------------------------------------------------------------------*/
 
-.portrait {
-    background-color: darkorchid;
+#about {
+    /* COLOR background-color: darkorchid;*/
+    
     width: 50%; 
     max-width: 640px;
     max-height: 667px;
     float: right;
     margin: 4% 5%;
-    padding: 5%;
+    padding: 5% 5% 0% 5%;
+    border: 2px solid #89b0ae;
+    text-align: center;
+    color: #6F868E;
 }
 
 #abouttext {
-    background-color: aqua;
+    /* COLOR background-color: aqua;*/
+    color: #6F868E;
     
     padding: 2% 5%;
 }#abouttext p{
-    background-color: beige;
+    /* COLOR background-color: beige;*/
     
     padding-bottom: 2%
 }
