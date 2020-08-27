@@ -145,18 +145,33 @@ img {
 
 /*------------------------------------------------------------------------ABOUT PAGE------------------------------------------------------------------------*/
 
+#about img{
+    max-width: auto;
+    max-height: auto;
+}
 #about {
     /* COLOR background-color: darkorchid;*/
     
     width: 50%; 
-    max-width: 640px;
-    max-height: 667px;
+    max-width: 500px;
+    max-height: 5%;
     float: right;
     margin: 4% 5%;
-    padding: 5% 5% 0% 5%;
+    padding: 1% 1% 1% 1%;
     border: 2px solid #89b0ae;
     text-align: center;
     color: #6F868E;
+    align-items: center;
+    background-color: #bee3db;
+}
+
+#about p{
+    align-content: center;
+    text-align: center;
+    padding: 0;
+    margin: auto;
+    max-width: 448px;
+    
 }
 
 #abouttext {
@@ -164,6 +179,7 @@ img {
     color: #6F868E;
     
     padding: 2% 5%;
+
 }#abouttext p{
     /* COLOR background-color: beige;*/
     
