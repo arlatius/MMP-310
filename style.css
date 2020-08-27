@@ -1,0 +1,151 @@
+/* comments like this */
+
+/* generic selector */
+
+body {
+    background-color: crimson;
+
+    margin: 0;
+    /* margins
+    margin (4): top right bottom left;
+    margin (3): top left/right bottom;
+    margin (2): top/bottom left/right;
+    margin (1): all;
+    margin: auto; automatically centers element*/
+    background-color: #355070;
+    color: #b56576;
+    /*text color*/
+    font-family: Arial, sans-serif;
+}
+
+a {
+    color: #eaac8b;
+}
+
+ul {
+    margin: 0;
+    /*the space on the top/bottom of the ul*/
+    padding: 0;
+    /*the space on the left of the ul*/
+}
+
+li {
+    list-style: none;
+    /*removes bullet points*/
+}
+
+/*psuedo selector- user interaction*/
+a:hover {
+    color: #db875a;
+    transition: 0.3s ease-in;
+    /*makes it smooth instead of instant*/
+}
+
+a:active {
+    color: #e56b6f;
+}
+
+img {
+    width: 100%;
+    max-width: 100%;
+    /* the picture will never blow up past its dimensions*/
+}
+
+/*id and class selector*/
+
+/* #idName */
+#container {
+    background-color: dimgrey;
+}
+
+#header {
+    background-color: salmon;
+
+    text-align: center;
+}
+
+#header h1 {
+    margin: 5% auto 0%;
+}
+
+#header ul {
+    margin: 0px auto 5%
+}
+
+#header li {
+    display: inline;
+    margin-left: 1em;
+    /*em means relative to font-size. 1 em = the size of the current font, 2 em = 2x the size of the current font, etc. default font size is 16*/
+}
+
+#header a {
+    font-size: 1.2em;
+}
+
+#portfolio {
+    background-color: aquamarine;
+
+    margin: 5%;
+    display: grid;
+    /*makes a grid. grid paramaters must be defined*/
+    grid-template-columns: 1fr 1fr 1fr;
+    /*fr is the fractional unit, it divides the space up evenly.*/
+    grid-template-rows: 1fr 1fr 1fr;
+    /*i have a 3x3 grid*/
+    grid-gap: 1em;
+    text-align: center;
+}
+
+#portfolio img {
+    max-width: 100%;
+    display: flex;
+    margin: auto;
+}
+
+
+/*.className { }*/
+.project {
+    background-color: darkseagreen;
+    
+    margin: 0;
+    border: 2px solid red;
+    padding: .5em;
+    /*background-color:transparent;*/
+    transition: background-color 0.3s ease-in;
+    
+    
+}
+
+.project:hover {
+    background-color: yellow;
+
+}
+
+.project a {
+    font-size: 1.3em;
+}
+
+
+
+
+
+
+/*------------------------------------------------------------------------ABOUT PAGE------------------------------------------------------------------------*/
+
+.portrait {
+    width: 50%; 
+    max-width: 640px;
+    max-height: 667px;
+    float: right;
+    margin: 5% 3%;
+}
+
+#abouttext {
+    background-color: aqua;
+    
+    padding: 2% 5%;
+}#abouttext p{
+    background-color: beige;
+    
+    padding-bottom: 2%
+}
