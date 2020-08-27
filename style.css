@@ -133,11 +133,13 @@ img {
 /*------------------------------------------------------------------------ABOUT PAGE------------------------------------------------------------------------*/
 
 .portrait {
+    background-color: darkorchid;
     width: 50%; 
     max-width: 640px;
     max-height: 667px;
     float: right;
-    margin: 5% 3%;
+    margin: 4% 5%;
+    padding: 5%;
 }
 
 #abouttext {
