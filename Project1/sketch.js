@@ -5,6 +5,7 @@ project 1
 
 //global variables
 var kazuhiroIdleL, kazuhiroIdleR, kazuhiroWalkL, kazuhiroWalkR
+var take;
 var kazuhiroX, kazuhiroY;
 var shadow;
 var kazuhiroSpeed = 7;
@@ -16,6 +17,7 @@ function preload() {
     kazuhiroWalkL = loadImage("../img/KazuhiroWalk32.gif");
     kazuhiroWalkR = loadImage("../img/KazuhiroWalk32Right.gif");
     shadow = loadImage("../img/Shadow32.png");
+    take = loadImage("../img/take.png");
 }
 
 function setup() {
@@ -30,7 +32,7 @@ function setup() {
 
 function draw() {
     background(200); //putting the bg here redraws it every frame so the frames of the transparent gif arent visible
-
+    
 
     //logic + events
     //character movement
@@ -48,6 +50,8 @@ function draw() {
     var DOWN = 40;
     var LEFT = 37;
 
+    
+    
 
     if (keyIsDown(W) || keyIsDown(UP)) {
         background(200); //putting the bg here redraws it every frame so the frames of the transparent gif arent visible
@@ -82,18 +86,21 @@ function draw() {
 
     if (kazuhiroIsLeft === true) {
         background(200);
-        image(kazuhiroWalkL, kazuhiroX, kazuhiroY);
         image(shadow, kazuhiroX, shadowY);
+        image(kazuhiroWalkL, kazuhiroX, kazuhiroY);
+        
     }
     if (kazuhiroIsLeft === false) {
         background(200);
-        image(kazuhiroWalkR, kazuhiroX, kazuhiroY);
         image(shadow, kazuhiroX, shadowY);
+        image(kazuhiroWalkR, kazuhiroX, kazuhiroY);
+        
     }
     if (kazuhiroIsWalking === false) {
         background(200);
-        image(kazuhiroIdleL, kazuhiroX, kazuhiroY);
         image(shadow, kazuhiroX, shadowY);
+        image(kazuhiroIdleL, kazuhiroX, kazuhiroY);
+        
     }
 
     /* added the background to each wasd if so that if multiple keys were pressed at once you cant see both animations. It was the only thing i could think of lmao but it worked*/
@@ -125,6 +132,8 @@ function draw() {
         }
     }
     
+    image(shadow,823, 418);
+    image(take,823,363);
     
 
 
