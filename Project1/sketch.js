@@ -5,7 +5,6 @@ project 1
 
 //global variables
 var kazuhiroIdleL, kazuhiroIdleR, kazuhiroWalkL, kazuhiroWalkR
-var take;
 var kazuhiroX, kazuhiroY;
 var shadow;
 var kazuhiroSpeed = 7;
@@ -17,7 +16,6 @@ function preload() {
     kazuhiroWalkL = loadImage("../img/KazuhiroWalk32.gif");
     kazuhiroWalkR = loadImage("../img/KazuhiroWalk32Right.gif");
     shadow = loadImage("../img/Shadow32.png");
-    //take = loadImage("../img/Take.png");
 }
 
 function setup() {
@@ -132,8 +130,7 @@ function draw() {
         }
     }
     
-    //image(shadow,823, 418);
-    //image(take,823,363);
+
     
 
 
