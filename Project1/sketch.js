@@ -17,7 +17,7 @@ function preload() {
     kazuhiroWalkL = loadImage("../img/KazuhiroWalk32.gif");
     kazuhiroWalkR = loadImage("../img/KazuhiroWalk32Right.gif");
     shadow = loadImage("../img/Shadow32.png");
-    take = loadImage("../img/Take.png");
+    //take = loadImage("../img/Take.png");
 }
 
 function setup() {
@@ -132,8 +132,8 @@ function draw() {
         }
     }
     
-    image(shadow,823, 418);
-    image(take,823,363);
+    //image(shadow,823, 418);
+    //image(take,823,363);
     
 
 
