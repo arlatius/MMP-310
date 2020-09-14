@@ -18,7 +18,7 @@ function preload() {
     kazuhiroWalkR = loadImage("../img/KazuhiroWalk32Right.gif");
     shadow = loadImage("../img/Shadow32.png");
     flower = loadImage("../img/Flower.png");
-    cloud = loadImage("../img/cloud.png");
+    cloud = loadImage("../img/Cloud.png");
 }
 
 function setup() {
