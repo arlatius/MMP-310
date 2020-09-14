@@ -49,6 +49,7 @@ function draw() {
         image(flower, x, 300);
         image(flower, x + 50, 400);
         image(flower, x, 500);
+        
     }
     
     
