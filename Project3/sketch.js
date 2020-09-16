@@ -1,15 +1,65 @@
 /*
-project 2
-9/14/2020
+project 3
+9/16/2020
 */
 
 //global variables
 var kazuhiroIdleL, kazuhiroIdleR, kazuhiroWalkL, kazuhiroWalkR
 var kazuhiroX, kazuhiroY;
 var shadow;
-var flower, cloud;
+var flowerYellow, flowerBlue,FlowerPink, cloud,grass1,grass2;
 var kazuhiroSpeed = 7;
 var shadowY;
+
+var flowerX = [50,136,113,197,269,319,396,419,360,488,556,618,701,641,751,857,779,900];
+var flowerY = [400,322,499,455,458,372,402,534,284,484,349,440,502,300,403,468,312,368];
+
+var flowerBluePosition = [
+    [616,409],
+    [596,354],
+    [591,256],
+    [356,558],
+    [348,540],
+    [763,370],
+    [277,364]
+]
+
+var flowerPinkPosition = [
+    [76,328],
+    [172,291],
+    [937,304],
+    [235,316],
+    [26,378]
+]
+
+var grass1Position = [
+    [477,507],
+    [229,414],
+    [218,466],
+    [156,268],
+    [627,476],
+    [724,416],
+    [41,267],
+    [735,448],
+    [323,422],
+    [516,365]
+]
+
+var grass2Position = [
+    [486,440],
+    [921,257],
+    [65,424],
+    [491,312],
+    [413,403],
+    [284,272],
+]
+
+var cloudPositions =[
+    [0,100],
+    [-447,146],
+    [416,75],
+    [800,50]
+];
 
 function preload() {
     kazuhiroIdleL = loadImage("../img/KazuhiroIdle32.gif");
@@ -17,8 +67,12 @@ function preload() {
     kazuhiroWalkL = loadImage("../img/KazuhiroWalk32.gif");
     kazuhiroWalkR = loadImage("../img/KazuhiroWalk32Right.gif");
     shadow = loadImage("../img/Shadow32.png");
-    flower = loadImage("../img/Flower.png");
+    flowerYellow = loadImage("../img/FlowerYellow.png");
+    flowerBlue = loadImage("../img/FlowerBlue.png");
+    flowerPink = loadImage("../img/FlowerPink.png");
     cloud = loadImage("../img/Cloud.png");
+    grass1 = loadImage("../img/Grass1.png");
+    grass2 = loadImage("../img/Grass2.png");
 }
 
 function setup() {
@@ -32,28 +86,51 @@ function setup() {
 }
 
 function draw() {
-    background(200); //putting the bg here redraws it every frame so the frames of the transparent gif arent visible
+    background('#abfff9'); //putting the bg here redraws it every frame so the frames of the transparent gif arent visible
     
 //setting
     //loop
     
 //clouds
-    for (var cloudCounter = 0; cloudCounter < 3; cloudCounter += 1) {
-        image(cloud, cloudCounter * 150, 100);
-        image(cloud, cloudCounter * 300, 37);
+    //i = 0 because the first index in an array is 0, i < cloudPositions.length means it will stop adding to i when its reached the number of items in an array
+    for (let i = 0; i < cloudPositions.length; i++){
+        image(cloud, cloudPositions[i][0], cloudPositions[i][1]); //cloudpositions[i][0] refers to the first item in the sub array (in this case the x pos) and [i][1] refers to the second (the y)
+        
+        cloudPositions[i][0] += 1; //cloud speed
+        if(cloudPositions[i][0] >= width + cloud.width){ //
+            cloudPositions[i][0] = 0 - cloud.width;
+        }
     }
+fill("#6df7b1");    
+noStroke()
+rect(0,244,width,height - 244);    
     
     //var makes a variable that exists for the rest of the program, let creates a variable that only exists til the end of the associated curly bracket
-    //flowers
-    for(let x = 0; x < width; x += 100) {
-        image(flower, x, 300);
-        image(flower, x + 50, 400);
-        image(flower, x, 500);
-        
+    //yellow flower
+for(let i = 0; i < flowerX.length; i++) {
+    image(flowerYellow, flowerX[i],flowerY[i]);
+}
+    
+    //blue flower
+    
+    for(let i = 0; i < flowerBluePosition.length; i++){
+        image(flowerBlue,flowerBluePosition[i][0],flowerBluePosition[i][0]);
     }
     
+    //pink flower
+    for(let i = 0; i < flowerPinkPosition.length; i++){
+        image(flowerPink,flowerPinkPosition[i][0],flowerPinkPosition[i][1]);
+    }
     
+   //grass1
+    for(let i =0; i<grass1Position.length;i++){
+        image(grass1,grass1Position[i][0],grass1Position[i][1]);
+    }
     
+    //grass2
+    for(let i= 0; i < grass2Position.length;i++){
+        image(grass2,grass2Position[i][0],grass2Position[i][1]);
+    }
     
     
     
@@ -149,9 +226,9 @@ function draw() {
         }
     }
     //up
-    if (kazuhiroY <= 63) {
+    if (kazuhiroY <= 214) {
         if (keyIsDown(W) || keyIsDown(UP)) {
-            kazuhiroY = 63;
+            kazuhiroY = 214;
         }
     }
     //down
@@ -170,6 +247,7 @@ function draw() {
     var canvasHeight = height;
 
     stroke('white');
+    fill("black");
     strokeWeight(3);
     textSize(15);
 
@@ -185,7 +263,8 @@ function draw() {
 
     text('kazuhiro position: ' + kazuhiroX + ', ' + kazuhiroY, 10, 20);
     text('is kazuhiro walking? ' + kazuhiroIsWalking, 10, 40);
-    text('clouds: ' + cloudCounter, 10, 60);
+    text('clouds: ' + cloudPositions.length, 10, 60);
+    text('flowers: ' + flowerX.length + ', ' + flowerBluePosition.length + ', ' + flowerPinkPosition.length, 10, 80);
 
 
 
