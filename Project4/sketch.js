@@ -3,13 +3,32 @@ project 4
 9/21/2020
 */
 
+//keycode variables
+var E = 69;
+var W = 87;
+var A = 65;
+var S = 83;
+var D = 68;
+
+var UP = 38;
+var RIGHT = 39;
+var DOWN = 40;
+var LEFT = 37;
+
+
 //global variables
-var kazuhiroIdleL, kazuhiroIdleR, kazuhiroWalkL, kazuhiroWalkR
+var kazuhiroIdleL, kazuhiroIdleR, kazuhiroWalkL, kazuhiroWalkR;
 var kazuhiroX, kazuhiroY;
+var kazuhiro;
+var kazuhiroShadowIcon;
 var shadow;
-var flowerYellow, flowerBlue, FlowerPink, cloud, grass1, grass2,signImg;
+var flowerYellow, flowerBlue, FlowerPink, cloud, grass1, grass2,signImg,chestOpen,chestClosed;
 var kazuhiroSpeed = 7;
 var shadowY;
+var textBoxImg;
+var font;
+
+
 
 var flowerYellowPosition = [
     [50, 400],
@@ -92,6 +111,13 @@ function preload() {
     grass1 = loadImage("../img/Grass1.png");
     grass2 = loadImage("../img/Grass2.png");
     signImg = loadImage("../img/Sign.png");
+    chestOpen = loadImage("../img/ChestOpen.png");
+    chestClosed = loadImage("../img/ChestClosed.png");
+    textBoxImg = loadImage("../img/TextBox.png");
+    kazuhiro = loadImage("../img/Kazuhiro64.png");
+    kazuhiroShadowIcon = loadImage("../img/KazuhiroShadow.png");
+
+    font = loadFont('../Font.ttf');
 }
 
 function setup() {
@@ -107,11 +133,57 @@ function setup() {
 function sign(msg, x, y) {
     image(signImg, x, y);
     
-    fill('white');
-    strokeWeight(3);
-    stroke('black');
+    //collision btwn player and sign
+    if(
+        kazuhiroX - kazuhiroIdleL.width/2 < x + signImg.width/2 &&
+        kazuhiroX + kazuhiroIdleL.width / 2 > x - signImg.width/2 &&
+        kazuhiroY - kazuhiroIdleL.height/2 < y + signImg.height/2 &&
+        kazuhiroY + kazuhiroIdleL.height/2 > y - signImg.height/2){
+        fill('white');
+        strokeWeight(3);
+        stroke('black');
+        textAlign(CENTER);
+        text(msg, x, y);
+       }
+    
+
+}
+
+function chest(loot, x, y){
+    image(chestClosed, x, y);
+    
+    //collision btw player and chest
+    if(
+        kazuhiroX - kazuhiroIdleL.width/2 < x +chestClosed.width/2 &&
+        kazuhiroX + kazuhiroIdleL.width/2 > x - chestClosed.width/2 &&
+        kazuhiroY - kazuhiroIdleL.width/2 < y + chestClosed.width/2 &&
+        kazuhiroY + kazuhiroIdleL.width/2 > y + chestClosed.width/2
+    ){
+       image(chestOpen,x,y);
+    stroke('white');
+    fill("black");
+        strokeWeight(3);
+       text(loot,x,y - 20);
+       }
+}
+
+function textBox(icon,outline,msg){
+    image(outline,width/2 - 175,495);
+    image(textBoxImg, width / 2, 500);
+    
+    noStroke();
+    textFont(font);
+    textSize(10);
+    fill("#32222e");
     textAlign(CENTER);
-    text(msg, x, y);
+    text(msg, width / 2 - 150, 500 - 30,textBoxImg.width - 20,textBoxImg.height - 30)
+    
+    /*rectMode(CENTER);
+    rect(width/2,500,textBoxImg.width - 30,textBoxImg.height - 30)*/
+    
+    //rect(width/2 - 240,462, 64,64);
+    image(icon,width/2 - 175,495);
+    
 }
 
 
@@ -184,15 +256,7 @@ function draw() {
     var state = 'idle';
     var state = 'left';
     var state = 'right';
-    var W = 87;
-    var A = 65;
-    var S = 83;
-    var D = 68;
-
-    var UP = 38;
-    var RIGHT = 39;
-    var DOWN = 40;
-    var LEFT = 37;
+    
 
 
 
@@ -285,6 +349,12 @@ function draw() {
         }
     }
 
+    
+//-------------------------------------------------------------OTHER STUFF?-------------------------------------------------------------
+    
+    textBox(kazuhiro,kazuhiroShadowIcon, "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus accumsan rutrum dui in euismod. Ut tincidunt eget tortor interdum semper. Praesent vel euismod nibh. Morbi sem odio, fermentum vitae ultrices quis, aliquam ac ipsum. Proin");
+    
+    chest("potion", 846, 414);
 
 //-------------------------------------------------------------REFERENCE TEXT-------------------------------------------------------------//
 
@@ -294,23 +364,22 @@ function draw() {
 
     stroke('white');
     fill("black");
+    textFont('helvetica')
     strokeWeight(3);
     textSize(15);
 
-    text('mouseX:' + round(mouseX), canvasWidth - 200, 15);
-    text('mouseY:' + round(mouseY), canvasWidth - 200, 30);
-    text('canvas size: ' + width + ', ' + height, canvasWidth - 200, 45);
-    text('keycodes: ' + `${key} ${keyCode}`, canvasWidth - 200, 60);
-    text('W:87', canvasWidth - 155, 80);
-    text('A:65', canvasWidth - 185, 100);
-    text('S:83', canvasWidth - 155, 120);
-    text('D:68', canvasWidth - 120, 100);
+    text('mouseX:' + round(mouseX), canvasWidth - 100, 15);
+    text('mouseY:' + round(mouseY), canvasWidth - 100, 30);
+    text('canvas size: ' + width + ', ' + height, canvasWidth - 100, 45);
+    text('keycodes: ' + `${key} ${keyCode}`, canvasWidth - 100, 60);
+    text('W:87', canvasWidth - 55, 80);
+    text('A:65', canvasWidth - 85, 100);
+    text('S:83', canvasWidth - 55, 120);
+    text('D:68', canvasWidth - 20, 100);
 
 
-    text('kazuhiro position: ' + kazuhiroX + ', ' + kazuhiroY, 10, 20);
-    text('is kazuhiro walking? ' + kazuhiroIsWalking, 10, 40);
-    text('clouds: ' + cloudPositions.length, 10, 60);
-    text('flowers: ' + flowerYellowPosition.length + ', ' + flowerBluePosition.length + ', ' + flowerPinkPosition.length, 10, 80);
+    text('kazuhiro position: ' + kazuhiroX + ', ' + kazuhiroY, 100, 20);
+
 
 
 
