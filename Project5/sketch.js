@@ -17,7 +17,7 @@ var LEFT = 37;
 
 
 //global variables
-var kazuhiroIdleL, kazuhiroIdleR, kazuhiroWalkL, kazuhiroWalkR;
+var kazuhiroIdleL, kazuhiroIdleR, kazuhiroWalkL, kazuhiroWalkR,KazuhiroJump;
 var kazuhiroX, kazuhiroY;
 var kazuhiroMainX, kazuhiroMainY;
 var kazuhiro;
@@ -28,7 +28,16 @@ var kazuhiroSpeed = 7;
 var shadowY;
 var textBoxImg;
 var font;
+var beeImage;
 
+var beePositions = []; //add x values here
+
+
+//game physics
+
+var GRAVITY = 2; //accelerations 2 px p/frame
+var kazuhiroYSpeed = 2;
+var kazuhiroIsJumping = false;
 var groundY = 400;
 
 var scene = "main"; //map, game, win, lose are the scenes
@@ -120,6 +129,8 @@ function preload() {
     textBoxImg = loadImage("../img/TextBox.png");
     kazuhiro = loadImage("../img/Kazuhiro64.png");
     kazuhiroShadowIcon = loadImage("../img/KazuhiroShadow.png");
+    KazuhiroJump = loadImage("../img/KazuhiroJump.png");
+    beeImage = loadImage("../img/Bee.png");
 
     font = loadFont('../Font.ttf');
 }
@@ -255,7 +266,44 @@ function game() {
     
     clouds();
     
-    image(kazuhiroWalkR, kazuhiroX,kazuhiroY);
+    //jumping and falling (use space)
+
+        
+    //hitting ground
+    if(kazuhiroY < groundY){
+        kazuhiroYSpeed += GRAVITY;  
+    }else {
+        kazuhiroYSpeed = 0;
+        kazuhiroIsJumping = false;
+    }
+    
+    //jumping
+    if (!kazuhiroIsJumping && keyIsDown(32)) {
+        kazuhiroYSpeed = -25;
+        kazuhiroIsJumping = true;
+    } 
+    
+    kazuhiroY += kazuhiroYSpeed;
+    
+    if (kazuhiroIsJumping) {
+        image(KazuhiroJump,kazuhiroX,kazuhiroY);
+    } else {
+        image(kazuhiroWalkR, kazuhiroX,kazuhiroY);
+    }
+    
+    for(let i = 0; i < beePositions.length; i++) {
+        let x = beePositions[i];
+        bee(x); //draws snake and detects collisions
+        beePositions[i] -= 10;
+        
+        //if hiro gets past last snake
+        if (i == beePositions.length-1 && kazuhiroX > x +100){
+            scene = 'win';
+        }
+    }
+    
+    
+    
     
 }
 
@@ -263,6 +311,7 @@ function win() {
     textSize(100);
     text('You win!', width/2, height/2);
     
+    textSize(50);
     text('Hit ENTER to return to Map', width/2, height/2 +100);
     if (keyIsDown(ENTER)){
         setupMain();
@@ -275,22 +324,36 @@ function lose() {
     
     textSize(50);
     text('Hit ENTER to retry.', width/2, height/2 +100);
-    text('Hit ESC to return to map.', width/2, height/2+200)
+    text('Hit ESC to return to map.', width/2, height/2+200);
     if (keyIsDown(ENTER)){
         setupGame();
     }
     else if (keyIsDown(ESCAPE)){
-        setupMain();
+        setupMain(false);
     }
 }
 
-function setupGame() {
+function setupGame(fromMain) {
     
+    if(fromMain) {
+            //saves hiros map position
     kazuhiroMainX = kazuhiroX;
     kazuhiroMainY = kazuhiroY;
+    }
     
+
+    
+    //puts hiro on ground
     kazuhiroX = 100;
     kazuhiroY = groundY + 30;
+    
+    //add bees
+    beePositions = []; //resets all snake positions
+    var beeNumber = random(8,12);
+    for(let i = 0; i < beeNumber; i++){
+        //adds an x position for new snake half a canvas away from eachother + random value
+        beePositions.push( random(width/2, width) + i * width / 2 );
+    }
     
     scene = 'game';
 }
@@ -324,7 +387,7 @@ function sign(msg, x, y) {
         
         //enter event 
         if(keyIsDown(69)) {
-            setupGame();
+            setupGame(true);
         }
        }
     
@@ -482,5 +545,20 @@ function movement(){
         if (keyIsDown(S) || keyIsDown(DOWN)) {
             kazuhiroY = 490;
         }
+    }
+}
+
+function bee(x){
+    let y = groundY;
+    image(beeImage,x,y);
+    
+    //collision
+    if(
+        kazuhiroX - kazuhiroWalkL.width/2 < x + beeImage.width/2 - 20 &&
+        kazuhiroX + kazuhiroWalkL.width / 2 > x - beeImage.width/2 +30 &&
+        kazuhiroY - kazuhiroWalkL.height/2 < y + beeImage.height/2 &&
+        kazuhiroY + kazuhiroWalkL.height/2 > y - beeImage.height/2){
+        
+        scene = 'lose';
     }
 }
