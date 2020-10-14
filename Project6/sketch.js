@@ -6,20 +6,19 @@ object oriented version
 classes and objects
 */
 
-/*------------------------IMAGE VARIABLES------------------------*/
+/*------------------------VARIABLES------------------------*/
 
+
+//image var
 var kazuhiroIdle, kazuhiroWalkL, kazuhiroWalkR, KazuhiroJump; //Hiro
 var flowerYellowImg, flowerBlueImg, FlowerPinkImg, cloudImg, grass1Img, grass2Img, signImg; //Setting
 var textBoxImg, hiroIcon, font; //UI
 var beeImage; //Enemies
 
-/*------------------------OBJECT VARIABLES------------------------*/
+//scene var
+var main;
 
-var flowerYellow = [];
-var cloud = [];
-var portals = [];
 var player;
-
 
 //keycode variables
 var E = 69;
@@ -27,7 +26,6 @@ var W = 87;
 var A = 65;
 var S = 83;
 var D = 68;
-
 var UP = 38;
 var RIGHT = 39;
 var DOWN = 40;
@@ -68,80 +66,57 @@ function setup() {
     createCanvas(940, 560);
     imageMode(CENTER);
 
-    flowerYellow.push(new GameObject(flowerYellowImg, 100, 200));
-    cloud.push(new Cloud(100, 100));
-    
-    portals.push(new Portal("Easy", 300, 300, "easy"));
-    portals.push(new Portal("Medium", 500, 300, "medium"));
-    portals.push(new Portal("Hard", 700, 300, "Hard"));
-    
+
+    //this identifies the previously declared variable as a certain object
     player = new Player(width / 2, height / 2);
+    main = new MapScene();
 
 }
 
 function draw() {
-    background('#abfff9');
-    
+    main.draw();
+
     /*------------------------Keyboard Events------------------------*/
-    
+
+    //movement
     player.isWalking = false;
-    
     if (keyIsDown(W) || keyIsDown(UP)) {
-       player.y -= player.speed;
+        player.y -= player.speed;
+        player.animationState = 'left';
         player.isWalking = true;
     }
-
     if (keyIsDown(S) || keyIsDown(DOWN)) {
         player.y += player.speed;
+        player.animationState = 'right';
         player.isWalking = true;
     }
-
     if (keyIsDown(A) || keyIsDown(LEFT)) {
         player.x -= player.speed;
+        player.animationState = 'left';
         player.isWalking = true;
     }
-
     if (keyIsDown(D) || keyIsDown(RIGHT)) {
         player.x += player.speed;
+        player.animationState = 'right';
         player.isWalking = true;
     }
 
 
-    //draws individual
-    for (let i = 0; i < flowerYellow.length; i++) {
-        flowerYellow[i].draw();
-    }
 
-    for (let i = 0; i < cloud.length; i++) {
-        cloud[i].draw(); //draws from gameobjects
-        cloud[i].update(); //adds movement from cloud
-    }
-    
-    for (let i = 0; i < portals.length; i++) {
-        portals[i].draw();
-        
-        if (portals[i].collide(player)){
-            portals[i].drawText();
-    }
-        if(keyIsDown(E)){
-            text("scene change",100,100); //will be changed later obv
-        }
-    }
 
     player.draw();
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        var canvasWidth = width;
+
+
+
+
+
+
+
+
+
+    /*------------------------Reference Text------------------------*/
+
+    var canvasWidth = width;
     var canvasHeight = height;
 
     stroke('white');
