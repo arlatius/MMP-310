@@ -11,12 +11,13 @@ classes and objects
 
 //image var
 var kazuhiroIdle, kazuhiroWalkL, kazuhiroWalkR, KazuhiroJump; //Hiro
-var flowerYellowImg, flowerBlueImg, FlowerPinkImg, cloudImg, grass1Img, grass2Img, signImg; //Setting
+var flowerYellowImg, flowerBlueImg, FlowerPinkImg, cloudImg, grass1Img, grass2Img, signImg, rockImg; //Setting
 var textBoxImg, hiroIcon, font; //UI
 var beeImage; //Enemies
 
 //scene var
-var main;
+var scenes = {};
+var currentScene = 'beginning';
 
 var player;
 
@@ -51,6 +52,7 @@ function preload() {
     grass1Img = loadImage("../img/Grass1.png");
     grass2Img = loadImage("../img/Grass2.png");
     signImg = loadImage("../img/Sign.png");
+    rockImg = loadImage("../img/Rock.png");
 
     //UI
     textBoxImg = loadImage("../img/TextBox.png");
@@ -69,42 +71,33 @@ function setup() {
 
     //this identifies the previously declared variable as a certain object
     player = new Player(width / 2, height / 2);
-    main = new MapScene();
+    scenes.beginning = new Beginning();
+    scenes.middle = new Middle();
+    scenes.end = new End();
+    
+    scenes.easy = new PlatformScene('#abfff9',3,6);
+    scenes.medium = new PlatformScene('#ff9d4d',6,9);
+    scenes.hard = new PlatformScene('#0a1e66',9,12);
+    
+    scenes.win = new Prompt ("you win", "hit enter to return to map");
+    scenes.lose = new Prompt ("you lose", "hit enter to retry");
 
 }
 
+function changeScene(sceneName, nextScene) {
+    currentScene = sceneName;
+    scenes[currentScene].setup(nextScene);
+}
+
 function draw() {
-    main.draw();
+    scenes[currentScene].draw();
 
-    /*------------------------Keyboard Events------------------------*/
-
-    //movement
-    player.isWalking = false;
-    if (keyIsDown(W) || keyIsDown(UP)) {
-        player.y -= player.speed;
-        player.animationState = 'left';
-        player.isWalking = true;
-    }
-    if (keyIsDown(S) || keyIsDown(DOWN)) {
-        player.y += player.speed;
-        player.animationState = 'right';
-        player.isWalking = true;
-    }
-    if (keyIsDown(A) || keyIsDown(LEFT)) {
-        player.x -= player.speed;
-        player.animationState = 'left';
-        player.isWalking = true;
-    }
-    if (keyIsDown(D) || keyIsDown(RIGHT)) {
-        player.x += player.speed;
-        player.animationState = 'right';
-        player.isWalking = true;
-    }
+    
 
 
 
 
-    player.draw();
+    
 
 
 
