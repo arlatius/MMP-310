@@ -28,7 +28,7 @@
 	"materials": [
 		{
 			"uuid": "93CC20DE-713F-4201-A09A-828FF2D14E77",
-			"type": "MeshBasicMaterial",
+			"type": "MeshStandardMaterial",
 			"color": 4868682,
 			"depthFunc": 3,
 			"depthTest": true,
@@ -60,7 +60,7 @@
 		},
 		{
 			"uuid": "9E93D907-FEFF-4A56-A0E1-ED818821AE13",
-			"type": "MeshBasicMaterial",
+			"type": "MeshStandardMaterial",
 			"color": 4868682,
 			"depthFunc": 3,
 			"depthTest": true,
@@ -76,7 +76,7 @@
 		},
 		{
 			"uuid": "753FF428-79B0-4C07-B7EB-29F327FB2267",
-			"type": "MeshBasicMaterial",
+			"type": "MeshStandardMaterial",
 			"color": 5066061,
 			"depthFunc": 3,
 			"depthTest": true,
@@ -92,7 +92,7 @@
 		},
 		{
 			"uuid": "8B4938AA-6C4E-4DAD-88E0-0223835C80CC",
-			"type": "MeshBasicMaterial",
+			"type": "MeshStandardMaterial",
 			"color": 3743502,
 			"depthFunc": 3,
 			"depthTest": true,
@@ -108,7 +108,7 @@
 		},
 		{
 			"uuid": "D3DEB385-0547-47CA-AC20-B179DDC2CBDC",
-			"type": "MeshBasicMaterial",
+			"type": "MeshStandardMaterial",
 			"color": 3940363,
 			"depthFunc": 3,
 			"depthTest": true,
