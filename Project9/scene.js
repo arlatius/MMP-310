@@ -49,7 +49,7 @@ street.rotation.x = Math.PI * -0.5;
 street.receiveShadow = true;
 scene.add(street); 
 
-const noiseTexture = new THREE.TextureLoader().load( 'textures/noise.png' );
+const noiseTexture = new THREE.TextureLoader().load( 'textures/Noise.png' );
 
 //sidewalk
 for (let x = -width / 2; x < width / 2; x += 1) {
