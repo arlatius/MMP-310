@@ -2,7 +2,7 @@
 const scene = new THREE.Scene();
 const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
 
-camera.position.set(0, 8, 10);
+camera.position.set(-10, 12, 10);
 
 const renderer = new THREE.WebGLRenderer({
 	alpha: true
@@ -214,8 +214,8 @@ let x = random(-3, width / 2);
 }
 
 //path
-const numPath = random(40, 50);
-for (let i = 0; i < numTrees; i++) {
+const numPath = random(30, 40);
+for (let i = 0; i < numPath; i++) {
 	const path = new THREE.Group();
 	const h = random(0.05, 0.1);
 
@@ -241,34 +241,72 @@ let x = random(-1, -9.5);
 
 }
 
+//rock circle
+newRock(5,0,.5,
+		0.5,0.5,0.5);
+newRock(5,0,-.5,
+		0.5,0.5,0.5);
+newRock(4.5,0,-1.6,
+		0.5,0.5,0.5);
+newRock(3.7,0,-2.4,
+		0.5,0.5,0.5);
+newRock(2.8,0,-2.8,
+		0.5,0.5,0.5);
+newRock(1.9,0,-2.6,
+		0.5,0.5,0.5);
+newRock(5,0,.5,
+		0.5,0.5,0.5);
+newRock(4.5,0,1.6,
+		0.5,0.5,0.5);
+newRock(3.7,0,2.4,
+		0.5,0.5,0.5);
+newRock(2.8,0,2.8,
+		0.5,0.5,0.5);
+newRock(1.9,0,2.6,
+		0.5,0.5,0.5);
+
+//random rocks
+newRock(random(-9,1),0,random(-5,5),
+		random(0.1,0.3),random(0.1,0.3),random(0.1,0.3));
+newRock(random(-9,1),0,random(-5,5),
+		random(0.1,0.3),random(0.1,0.3),random(0.1,0.3));
+newRock(random(-9,1),0,random(-5,5),
+		random(0.1,0.3),random(0.1,0.3),random(0.1,0.3));
+newRock(random(-9,1),0,random(-5,5),
+		random(0.1,0.3),random(0.1,0.3),random(0.1,0.3));
+newRock(random(-9,1),0,random(-5,5),
+		random(0.1,0.3),random(0.1,0.3),random(0.1,0.3));
+newRock(random(-9,1),0,random(-5,5),
+		random(0.1,0.3),random(0.1,0.3),random(0.1,0.3));
+newRock(random(-9,1),0,random(-5,5),
+		random(0.1,0.3),random(0.1,0.3),random(0.1,0.3));
+newRock(random(-9,1),0,random(-5,5),
+		random(0.1,0.3),random(0.1,0.3),random(0.1,0.3));
+newRock(random(-9,1),0,random(-5,5),
+		random(0.1,0.3),random(0.1,0.3),random(0.1,0.3));
+newRock(random(-9,1),0,random(-5,5),
+		random(0.1,0.3),random(0.1,0.3),random(0.1,0.3));
+newRock(random(-9,1),0,random(-5,5),
+		random(0.1,0.3),random(0.1,0.3),random(0.1,0.3));
+newRock(random(-9,1),0,random(-5,5),
+		random(0.1,0.3),random(0.1,0.3),random(0.1,0.3));
+
 //stones random
+function newRock(x,y,z,scaleX,scaleY,scaleZ){
+	const rockGeo = new THREE.DodecahedronGeometry();
+	const rockMat = new THREE.MeshStandardMaterial({color: 0xbabcbf, metalness: 0.4, roughness: 1});
+	const rock = new THREE.Mesh (rockGeo, rockMat);
 
-/*const numPath = random(15, 20);
-for (let i = 0; i < numTrees; i++) {
-	const path = new THREE.Group();
-	const h = random(0.1, 0.3);
+	rock.rotation.x=random(0,0.5);
+	rock.rotation.y=random(0,0.5);
 
-	//trunk
-	const geo = new THREE.CylinderGeometry(0.125, 0.25, h, 5);
-	const mat = new THREE.MeshStandardMaterial({
-		color: 0x7a592b,
-		metalness: 0.5
-	});
-	
-	const stone = new THREE.Mesh(geo, mat);
-	stone.castShadow = true;
-	stone.receiveShadow = true; 
-	path.add(stone);
+	rock.position.set(x,y,z);
 
-let x = random(-3, -10);
-	let y = h / 2;
-	let z = random(4, -3.5);
-	
-	path.position.set(x, y, z);
-	scene.add(path);
+	rock.scale.set(scaleX,scaleY,scaleZ);
 
+	scene.add(rock);
+}
 
-}*/
 
 //random range function
 
