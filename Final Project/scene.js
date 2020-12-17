@@ -19,7 +19,7 @@ const controls = new THREE.OrbitControls(camera, renderer.domElement);
 const ambientLight = new THREE.AmbientLight(0xfff5ba, 0.1); // (color, intensity)
 scene.add(ambientLight);
 
-const hemLight = new THREE.HemisphereLight(0xffc9e8, 0x006887, 0.7); //sky color, ground color, intensity
+const hemLight = new THREE.HemisphereLight(0xfffcd9, 0x006887, 0.7); //sky color, ground color, intensity
 scene.add(hemLight);
 
 const directionalLight = new THREE.DirectionalLight(0xff2676, 0.5);
@@ -38,7 +38,7 @@ directionalLight.shadow.camera.far = 500; // default
 const width = 20;
 
 //reference image of the flat map
-const referenceTex = new THREE.TextureLoader().load( 'textures/flat.png' );
+const referenceTex = new THREE.TextureLoader().load( 'textures/grass.png' );
 
 //plane
 const streetGeo = new THREE.PlaneGeometry(width, 10);
